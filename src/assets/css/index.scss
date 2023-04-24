@@ -1,0 +1,73 @@
+/* Bootstrap default variable overrides */
+// general
+
+// form
+
+// btn
+
+// contrast
+$min-contrast-ratio:   3;
+
+// color
+$primary: #50608c;
+$primary-light: #687099;
+$danger-dark: #9c1525;
+
+/* Bootstrap functions */
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+
+// additional color
+$custom-colors: (
+  "danger-dark": $danger-dark,
+  "gray-dark": $gray-700,
+  "primary-light": $primary-light
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+/* Bootstrap5 */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Bootstrap default style overrides */
+// btn
+
+/* General style */
+// others
+
+// width
+.w- {
+  &50p {
+    width: 50px;
+  }
+  &100p {
+    width: 100px;
+  }
+  &150p {
+    width: 150px;
+  }
+  &200p {
+    width: 200px;
+  }
+  &250p {
+    width: 250px;
+  }
+  &300p {
+    width: 300px;
+  }
+}
+
+// font size
+.fs {
+  &-0 {
+    font-size: calc(1.43rem + 1.8vw)!important;
+  }
+  &-7 {
+    font-size: 0.9rem!important;
+  }
+  &-8 {
+    font-size: 0.8rem!important;
+  }
+  &-9 {
+    font-size: 0.72rem!important;
+  }
+}
