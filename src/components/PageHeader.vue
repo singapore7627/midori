@@ -1,10 +1,26 @@
 <template>
-  <header class="border-bottom border-4 border-boundary p-3 w-100">
-    <nav>
-      <ul>
-        <li><a href="/jp">トップ</a></li>
-      </ul>
-    </nav>
+  <header>
+    <div class="px-3 py-2 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <div class="col-4 me-lg-auto text-start fs-4">
+            みどり市ポータル
+          </div>
+          <ul class="nav col-8 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a href="#" class="nav-link text-white">
+                ホーム
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white">
+                ごみカレンダー
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </header>
 </template>
 
