@@ -6,12 +6,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      title: 'みどり市ポータル',
+      desc: 'みどり市のポータルサイトです。市民に役立つ情報を発信します。'
+    }
   },
   {
     path: '/trash',
     name: 'trash',
-    component: TrashCalendar
+    component: TrashCalendar,
+    meta: {
+      title: 'みどり市ポータル|ごみカレンダー',
+      desc: '笠懸町のごみカレンダーです。'
+    }
   },
   {
     path: '/about',
