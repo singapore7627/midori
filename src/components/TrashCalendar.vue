@@ -109,6 +109,48 @@ export default defineComponent({
         backgroundColor: '#455500',
       });
     });
+    let cans: Array<string> = [
+      '2023-05-18',
+      '2023-06-15',
+      '2023-07-20',
+      '2023-08-17',
+      '2023-09-21',
+      '2023-10-19',
+      '2023-11-16',
+      '2023-12-21',
+      '2024-01-18',
+      '2024-02-15',
+      '2024-03-21',
+    ];
+    cans.forEach((can: string) => { 
+      this.calendarOptions.events.push({
+        title: '缶',
+        date: can,
+        borderColor: '#252550',
+        backgroundColor: '#252550',
+      });
+    });
+    let bottles: Array<string> = [
+      '2023-05-25',
+      '2023-06-22',
+      '2023-07-27',
+      '2023-08-24',
+      '2023-09-28',
+      '2023-10-26',
+      '2023-11-23',
+      '2023-12-28',
+      '2024-01-25',
+      '2024-02-22',
+      '2024-03-28',
+    ];
+    bottles.forEach((bottle: string) => { 
+      this.calendarOptions.events.push({
+        title: 'ビン',
+        date: bottle,
+        borderColor: '#552500',
+        backgroundColor: '#552500',
+      });
+    });
   },
 });
 </script>
