@@ -11,6 +11,7 @@
     "@fullcalendar/core": "^6.1.6",
     "@fullcalendar/daygrid": "^6.1.6",
     "@fullcalendar/vue3": "^6.1.6",
+    "@vueuse/head": "^1.1.26",
     "bootstrap": "^5.2.3",
     "core-js": "^3.8.3",
     "register-service-worker": "^1.7.2",
