@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TrashCalendarView from '../views/TrashCalendarView.vue'
-import MealView from '../views/MealView.vue'
+import MealsView from '../views/MealsView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,16 +17,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/meal-list',
     name: 'meal-list',
-    // TODO 変更 レストラン一覧⇒個別ページを配下に作る + ランダムなURLを発行してランダムに遷移させる 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/meal/:id',
-    name: 'meal',
-    component: MealView,
+    path: '/meals',
+    name: 'meals',
+    component: MealsView,
   },
 ]
 
