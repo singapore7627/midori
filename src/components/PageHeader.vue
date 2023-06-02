@@ -1,36 +1,33 @@
 <template>
-  <header>
-    <div class="px-3 py-2 bg-primary text-white">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <h1 class="col-6 col-md-5 me-lg-auto my-0 text-start fs-4">
-            みどり市ポータル
-          </h1>
-          <ul class="nav col-6 col-md-7 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="#" class="nav-link text-white">
-                ホーム
-              </a>
-            </li>
-            <li>
-              <router-link to="meals">
-                <div class="nav-link text-white">
-                  グルメ
-                </div>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="trash">
-                <div class="nav-link text-white">
-                  ごみカレンダー
-                </div>
-              </router-link>
-            </li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-md px-md-2 navbar-dark bg-primary">
+    <div class="container-fluid">
+      <h1 class="navbar-brand m-0 fs-4 fw-bold">
+        みどり市ポータル
+      </h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMidori" aria-controls="navbarMidori" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMidori">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white fw-normal">
+              ホーム
+            </a>
+          </li>
+          <li class="nav-item">
+            <router-link to="meals" class="nav-link text-white fw-normal">
+              グルメ
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="trash" class="nav-link text-white fw-normal">
+              ごみカレンダー
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
-  </header>
+  </nav>
 </template>
 
 <script lang="ts">
