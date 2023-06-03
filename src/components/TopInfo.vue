@@ -9,21 +9,21 @@
       <div class="carousel-inner">
         <div class="carousel-item active position-relative">
           <img src="@/assets/img/bg-hanetaki.png" class="d-block w-100 h-100" alt="高津戸橋">
-          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-1 p-4 ps-5 caption rounded">
+          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-2 p-3 ps-4 p-md-4 ps-md-5 caption rounded">
             豊かな自然の街、<br/>
             みどり市。
           </div>
         </div>
         <div class="carousel-item">
           <img src="@/assets/img/bg-sakura-kori.jpg" class="d-block w-100 h-100" alt="元総社えんにち茶屋">
-          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-1 p-4 ps-5 caption rounded">
+          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-2 p-3 ps-4 p-md-4 ps-md-5 caption rounded">
             食と文化の街、<br/>
             みどり市。
           </div>
         </div>
         <div class="carousel-item">
           <img src="@/assets/img/bg-senbon.jpg" class="d-block w-100 h-100" alt="赤城南面千本桜">
-          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-1 p-4 ps-5 caption rounded">
+          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-2 p-3 ps-4 p-md-4 ps-md-5 caption rounded">
             平和と安心の街、<br/>
             みどり市。
           </div>

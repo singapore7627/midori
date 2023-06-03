@@ -31,6 +31,8 @@ import { defineComponent, reactive } from 'vue';
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja';
+import { doc, getDoc } from "firebase/firestore";
+import db from '@/firebase/firestore';
 
 export default defineComponent({
   name: 'TrashCalendar',
@@ -62,7 +64,15 @@ export default defineComponent({
       }
     }
   },
-  mounted:  function() {
+  mounted: async function() {
+    const docRef = doc(db, "trashTypes", "bottles");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
+    }
     let burnables: Array<string> = [
       '2023-05-09',
       '2023-05-12',
