@@ -31,8 +31,10 @@ import { defineComponent, reactive } from 'vue';
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja';
-import { doc, getDoc } from "firebase/firestore";
+import { getDatabase, ref, orderByChild } from "firebase/database";
+import { doc, query, collection, getDoc, getDocs, where, orderBy, startAfter, Timestamp } from "firebase/firestore";
 import db from '@/firebase/firestore';
+import { format } from 'date-fns/fp';
 
 export default defineComponent({
   name: 'TrashCalendar',
@@ -46,14 +48,7 @@ export default defineComponent({
         initialView: 'dayGridMonth',
         weekends: true,
         locale: jaLocale,
-        events: [
-          { 
-            title: 'ペットボトル',
-            date: '2023-05-17',
-            borderColor: '#455500',
-            backgroundColor: '#455500',
-          }
-        ],
+        events: [{}],
         dayCellContent: (date: object): object => {
           type MyObject = {
             [key: string]: any;
@@ -65,24 +60,28 @@ export default defineComponent({
     }
   },
   mounted: async function() {
-    const docRef = doc(db, "trashTypes", "bottles");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
+    let dateNow = new Date();
+    const querySnap = await getDocs(
+      query(
+        collection(db, 'trashDates'),
+        where('trashArea', '==', doc(db, 'trashAreas', 'kasakake')),
+        orderBy("targetDate"), startAfter(Timestamp.fromMillis(dateNow.setDate(dateNow.getDate() - 2)))
+      )
+    );
+    
+    if (querySnap.docs) {
+      querySnap.forEach(doc => {
+        console.log(doc.data().trashType.id);
+        console.log(doc.data().trashArea.id);
+        this.calendarOptions.events.push({
+          title: '燃えるゴミ',
+          date: format('yyyy-MM-dd', doc.data().targetDate.seconds * 1000),
+          borderColor: '#990000',
+          backgroundColor: '#990000',
+        });
+      });
     }
     let burnables: Array<string> = [
-      '2023-05-09',
-      '2023-05-12',
-      '2023-05-16',
-      '2023-05-19',
-      '2023-05-23',
-      '2023-05-26',
-      '2023-05-30',
-      '2023-06-02',
-      '2023-06-06',
       '2023-06-09',
       '2023-06-13',
       '2023-06-16',
@@ -120,7 +119,6 @@ export default defineComponent({
       });
     });
     let cans: Array<string> = [
-      '2023-05-18',
       '2023-06-15',
       '2023-07-20',
       '2023-08-17',
@@ -141,7 +139,6 @@ export default defineComponent({
       });
     });
     let bottles: Array<string> = [
-      '2023-05-25',
       '2023-06-22',
       '2023-07-27',
       '2023-08-24',
