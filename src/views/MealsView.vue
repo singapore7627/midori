@@ -14,7 +14,7 @@ import PageFooter from '@/components/PageFooter.vue';
 import { useHead } from 'unhead'
 
 export default defineComponent({
-  name: 'HomeView',
+  name: 'MealView',
   components: {
     MealList,
     PageHeader,
