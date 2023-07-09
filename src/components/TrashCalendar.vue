@@ -162,9 +162,10 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja';
 import { getDatabase, ref, orderByChild } from "firebase/database";
-import { doc, query, collection, getDoc, getDocs, where, orderBy, startAfter, Timestamp } from "firebase/firestore";
+import { doc, query, collection, getDoc, setDoc, getDocs, where, orderBy, startAfter, Timestamp } from "firebase/firestore";
 import db from '@/firebase/firestore';
 import { format } from 'date-fns/fp';
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 export default defineComponent({
   name: 'TrashCalendar',
@@ -224,9 +225,28 @@ export default defineComponent({
         });
       });
     }
-    this.getTrashDates();
+    await this.signInAnonymously();
+    await this.getTrashArea();
+    await this.getTrashDates();
   },
   methods: {
+    getTrashArea: async function () {
+      if (this.targetTrashAreaId) return;
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) return;
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const trashArea = docSnap.data().trashArea.id
+        this.targetTrashAreaId = trashArea;
+        console.log(this.targetTrashAreaId);
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    },
     getTrashDates: async function () {
       if (!this.targetTrashAreaId) return;
       this.calendarOptions.events = [];
@@ -250,6 +270,27 @@ export default defineComponent({
           });
         });
       }
+    },
+    signInAnonymously: async function () {
+      const auth = getAuth();
+      signInAnonymously(auth)
+        .then(() => {
+          console.log("good");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+      return auth;
+    }
+  },
+  watch: {
+    targetTrashAreaId: async function () {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) return;
+      await setDoc(doc(db, "users", user.uid), {
+        trashArea: doc(db, 'trashAreas/' + this.targetTrashAreaId)
+      });
     }
   },
   computed: {
