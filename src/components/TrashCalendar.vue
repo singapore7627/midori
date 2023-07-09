@@ -2,19 +2,22 @@
   <div class="container">
     <div class="p-3 my-2">
       <h2>{{ targetTrashAreaName }}ごみカレンダー</h2>
-      <div class="form-check form-check-inline" v-for="trashArea in trashAreas" :key="trashArea.id" v-show="trashArea.id">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="trashAreaRadios"
-          :id="'trashArea' + trashArea.id"
-          :value="trashArea.id"
+      <div class="form-floating mb-2 ms-auto">
+        <select
+          class="form-select"
+          id="floatingSelect"
+          aria-label="Floating label select example"
           v-model="targetTrashAreaId"
           @change="getTrashDates"
-        >
-        <label class="form-check-label" :for="'trashArea' + trashArea.id">
-          {{ trashArea.name }}
-        </label>
+          >
+          <option 
+            v-for="trashArea in trashAreas"
+            :value="trashArea.id" 
+            :key="trashArea.id"
+            v-show="trashArea.id"
+            >{{ trashArea.name }}</option>
+        </select>
+        <label for="floatingSelect">地域設定</label>
       </div>
       <FullCalendar
         defaultView="dayGridMonth"
@@ -154,6 +157,9 @@
 .small {
   max-width: 600px;
 }
+.form-floating {
+  max-width: 300px;
+}
 </style>
 
 <script lang="ts">
@@ -162,7 +168,7 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja';
 import { getDatabase, ref, orderByChild } from "firebase/database";
-import { doc, query, collection, getDoc, setDoc, getDocs, where, orderBy, startAfter, Timestamp } from "firebase/firestore";
+import { doc, query, collection, getDoc, setDoc, getDocs, where, orderBy, startAfter, limit, Timestamp } from "firebase/firestore";
 import db from '@/firebase/firestore';
 import { format } from 'date-fns/fp';
 import { getAuth, signInAnonymously } from "firebase/auth";
@@ -255,7 +261,9 @@ export default defineComponent({
         query(
           collection(db, 'trashDates'),
           where('trashArea', '==', doc(db, 'trashAreas', this.targetTrashAreaId)),
-          orderBy("targetDate"), startAfter(Timestamp.fromMillis(dateNow.setDate(dateNow.getDate() - 32)))
+          orderBy("targetDate"),
+          startAfter(Timestamp.fromMillis(dateNow.setDate(dateNow.getDate() - 2))),
+          limit(30)
         )
       );
 
