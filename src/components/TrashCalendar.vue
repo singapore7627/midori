@@ -2,7 +2,10 @@
   <div class="container">
     <div class="p-3 my-2">
       <h2>{{ targetTrashAreaName }}ごみカレンダー</h2>
-      <div class="form-floating mb-2 ms-auto">
+      <div class="mb-2 text-end" v-show="!canShowTrashArea">
+        <button @click="canShowTrashArea = !canShowTrashArea" class="btn btn-sm btn-outline-secondary">地域を変更する</button>
+      </div>
+      <div class="form-floating mb-2 ms-auto" v-show="canShowTrashArea">
         <select
           class="form-select"
           id="floatingSelect"
@@ -195,6 +198,7 @@ export default defineComponent({
         }
       },
       targetTrashAreaId: '',
+      canShowTrashArea: false,
       trashAreas: [{}],
       trashTypes: [{}]
     }
@@ -278,10 +282,12 @@ export default defineComponent({
           });
         });
       }
+
+      this.canShowTrashArea = false;
     },
     signInAnonymously: async function () {
       const auth = getAuth();
-      signInAnonymously(auth)
+      await signInAnonymously(auth)
         .then(() => {
           console.log("good");
         })
