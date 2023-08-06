@@ -172,7 +172,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja';
 import { getDatabase, ref, orderByChild } from "firebase/database";
 import { doc, query, collection, getDoc, setDoc, getDocs, where, orderBy, startAfter, limit, Timestamp } from "firebase/firestore";
-import db from '@/firebase/firestore';
+import { db } from '@/firebase/config';
 import { format } from 'date-fns/fp';
 import { getAuth, signInAnonymously } from "firebase/auth";
 

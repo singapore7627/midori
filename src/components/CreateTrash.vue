@@ -50,7 +50,7 @@
 import { defineComponent, reactive } from 'vue';
 import { getDatabase, ref, orderByChild } from "firebase/database";
 import { doc, query, collection, getDoc, getDocs, addDoc, Timestamp } from "firebase/firestore";
-import db from '@/firebase/firestore';
+import { db } from '@/firebase/config';
 
 export default defineComponent({
   name: 'MealList',
