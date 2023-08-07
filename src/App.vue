@@ -31,17 +31,10 @@ import { messaging, vapidKey } from "@/firebase/config";
 
 export default ({
   mounted: function() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/firebase-messaging-sw.js')
-         .then(registration => {
-           registration.showNotification("バイブレーションの例", {
-             body: "ブンブン! ブンブン!",
-             icon: "../images/touch/chrome-touch-icon-192x192.png",
-             vibrate: [200, 100, 200, 100, 200, 100, 200],
-             tag: "vibration-sample",
-           });
-         })
-    }
+    navigator.serviceWorker.register('/firebase-messaging-sw.js')
+       .then(registration => {
+         return;
+       })
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
         getToken(messaging, vapidKey)
